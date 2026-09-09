@@ -17,14 +17,14 @@
     "@capacitor/share": "^8.0.1",
     "@capacitor/status-bar": "^8.0.3",
     "@supabase/supabase-js": "^2.112.3",
-    "react": "^18.3.1",
+    "react": "^19.2.8",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@capacitor/android": "^8.5.0",
     "@capacitor/cli": "^8.5.0",
     "@types/node": "^24.13.3",
-    "@types/react": "^18.3.12",
+    "@types/react": "^19.2.18",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "typescript": "^5.6.3",
