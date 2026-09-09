@@ -1,0 +1,75 @@
+/*
+ * Base - scoped, never global. Wrap a screen in `.bdg-app` to get the app
+ * background, text colour and font; components also set their own font so
+ * they render correctly without it.
+ */
+.bdg-app {
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-md);
+  line-height: var(--bdg-leading-normal);
+  color: var(--bdg-color-text);
+  background: var(--bdg-color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+.bdg-app *,
+.bdg-app *::before,
+.bdg-app *::after {
+  box-sizing: border-box;
+}
+.bdg-app :focus-visible {
+  outline: none;
+  box-shadow: var(--bdg-focus-ring);
+}
+
+/* Screen + container frames */
+.bdg-screen {
+  width: 100%;
+  max-width: var(--bdg-screen-max);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: var(--bdg-space-4);
+  background: var(--bdg-color-bg);
+}
+.bdg-container {
+  width: 100%;
+  max-width: var(--bdg-container-max);
+  margin: 0 auto;
+  padding: var(--bdg-space-6);
+}
+
+/* Visually-hidden helper (labels for icon-only controls) */
+.bdg-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Motion is a preference (audit DS-16 / UI-18). With the OS set to reduce it,
+   the duration tokens every transition uses collapse to nothing, and the two
+   keyframe animations - the button spinner and the indeterminate progress
+   slide - settle on a single frame instead of looping. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --bdg-duration-fast: 0ms;
+    --bdg-duration-normal: 0ms;
+  }
+  .bdg-button__spinner,
+  .bdg-progress--indeterminate .bdg-progress__fill {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+  [class*="bdg-"],
+  [class*="bdg-"]::before,
+  [class*="bdg-"]::after {
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

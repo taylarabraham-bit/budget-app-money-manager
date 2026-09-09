@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Themed-icon layer (Android 13+): the wallet mark as a single-colour silhouette, kept inside the adaptive safe zone. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M34,38 C34,35.2 36.2,33 39,33 L69,33 C71.8,33 74,35.2 74,38 L74,70 C74,72.8 71.8,75 69,75 L39,75 C36.2,75 34,72.8 34,70 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M56,50 L71,50 C72.7,50 74,51.3 74,53 L74,59 C74,60.7 72.7,62 71,62 L56,62 C54.3,62 53,60.7 53,59 L53,53 C53,51.3 54.3,50 56,50 Z" />
+</vector>

@@ -1,0 +1,23 @@
+/* Favourites manage dialog - tokens only. */
+.quickadd-list { display: flex; flex-direction: column; border-top: 1px solid var(--bdg-color-border); }
+.quickadd-row {
+  display: flex;
+  align-items: center;
+  gap: var(--bdg-space-3);
+  padding: var(--bdg-space-3) 0;
+  border-bottom: 1px solid var(--bdg-color-border);
+}
+.quickadd-row__form { flex: 1 1 auto; min-width: 0; }
+.quickadd-row__icon {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--bdg-radius-md);
+  background: var(--bdg-color-surface-2);
+  font-size: 18px;
+  line-height: 1;
+}
+.quickadd-row__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.quickadd-row__title { font-weight: var(--bdg-weight-medium); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

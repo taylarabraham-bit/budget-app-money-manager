@@ -1,0 +1,212 @@
+/* Shared field frame: TextField, AmountInput, Select */
+.bdg-field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--bdg-space-1);
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--bdg-font-sans);
+  color: var(--bdg-color-text);
+  text-align: left;
+}
+.bdg-field--full { display: flex; width: 100%; }
+.bdg-field__label {
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+  line-height: var(--bdg-leading-snug);
+  color: var(--bdg-color-text);
+}
+.bdg-field__control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: var(--bdg-control-md);
+  background: var(--bdg-color-surface);
+  border: 1px solid var(--bdg-color-border-strong);
+  border-radius: var(--bdg-radius-md);
+  transition: border-color var(--bdg-duration-fast) var(--bdg-ease), box-shadow var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-field__control:focus-within {
+  border-color: var(--bdg-color-primary);
+  box-shadow: var(--bdg-focus-ring);
+}
+/* The control draws the focus ring (:focus-within); the inner input must not add its own,
+   which the global `.bdg-app :focus-visible` rule would otherwise do - a second rectangle
+   crossing the $ / USD adornments. */
+.bdg-field__control .bdg-field__input:focus-visible { outline: none; box-shadow: none; }
+.bdg-field--sm .bdg-field__control { min-height: var(--bdg-control-sm); border-radius: var(--bdg-radius-sm); }
+.bdg-field--lg .bdg-field__control { min-height: var(--bdg-control-lg); border-radius: var(--bdg-radius-lg); }
+.bdg-field__input {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--bdg-space-3);
+  background: transparent;
+  border: 0;
+  outline: none;
+  font: inherit;
+  font-size: var(--bdg-text-md);
+  line-height: var(--bdg-leading-normal);
+  color: var(--bdg-color-text);
+  min-height: calc(var(--bdg-control-md) - 2px);
+}
+.bdg-field--sm .bdg-field__input { font-size: var(--bdg-text-sm); padding: 0 var(--bdg-space-2); min-height: calc(var(--bdg-control-sm) - 2px); }
+.bdg-field--lg .bdg-field__input { font-size: var(--bdg-text-lg); padding: 0 var(--bdg-space-4); min-height: calc(var(--bdg-control-lg) - 2px); }
+.bdg-field__input::placeholder { color: var(--bdg-color-text-subtle); }
+/* A type="number" field (a percentage, a day of the month) keeps the plain frame: the
+   native spinner would sit inside the control on top of the suffix (audit DS-20). */
+.bdg-field__input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
+.bdg-field__input[type="number"]::-webkit-inner-spin-button,
+.bdg-field__input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.bdg-field__adornment {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  color: var(--bdg-color-text-muted);
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+  line-height: 1;
+}
+.bdg-field__adornment--prefix { padding-left: var(--bdg-space-3); }
+.bdg-field__adornment--suffix { padding-right: var(--bdg-space-3); }
+.bdg-field__adornment--prefix + .bdg-field__input { padding-left: var(--bdg-space-2); }
+.bdg-field__adornment > svg { width: 1.125em; height: 1.125em; }
+.bdg-field__message {
+  font-size: var(--bdg-text-xs);
+  line-height: var(--bdg-leading-snug);
+  color: var(--bdg-color-text-muted);
+}
+.bdg-field__message--error { color: var(--bdg-color-negative); font-weight: var(--bdg-weight-medium); }
+.bdg-field--error .bdg-field__control { border-color: var(--bdg-color-negative); }
+.bdg-field--error .bdg-field__control:focus-within { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.22); }
+.bdg-field--disabled { opacity: 0.6; }
+.bdg-field--disabled .bdg-field__control { background: var(--bdg-color-surface-2); }
+.bdg-field--disabled .bdg-field__input { cursor: not-allowed; }
+
+/* AmountInput */
+.bdg-amount-input .bdg-amount-input__symbol { font-size: var(--bdg-text-lg); color: var(--bdg-color-text); }
+.bdg-amount-input .bdg-amount-input__input {
+  font-family: var(--bdg-font-sans);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--bdg-weight-semibold);
+  letter-spacing: var(--bdg-tracking-tight);
+}
+.bdg-amount-input.bdg-field--lg .bdg-amount-input__input { font-size: var(--bdg-text-xl); }
+.bdg-amount-input .bdg-amount-input__code {
+  font-size: var(--bdg-text-xs);
+  letter-spacing: var(--bdg-tracking-wide);
+  color: var(--bdg-color-text-subtle);
+}
+
+/* Select */
+.bdg-select__native { padding-right: var(--bdg-space-10); cursor: pointer; }
+.bdg-select__native:invalid,
+.bdg-select__native:has(option[value=""]:checked) { color: var(--bdg-color-text-subtle); }
+.bdg-select__chevron {
+  position: absolute;
+  right: var(--bdg-space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  color: var(--bdg-color-text-muted);
+}
+.bdg-select__chevron > svg { width: 100%; height: 100%; }
+
+/* Checkbox */
+.bdg-checkbox { display: inline-flex; flex-direction: column; gap: var(--bdg-space-1); font-family: var(--bdg-font-sans); color: var(--bdg-color-text); }
+.bdg-checkbox__row { display: inline-flex; align-items: flex-start; gap: var(--bdg-space-3); cursor: pointer; }
+.bdg-checkbox--disabled .bdg-checkbox__row { cursor: not-allowed; opacity: 0.6; }
+.bdg-checkbox__box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  border: 1.5px solid var(--bdg-color-border-strong);
+  border-radius: var(--bdg-radius-sm);
+  background: var(--bdg-color-surface);
+  color: var(--bdg-color-on-primary);
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease), border-color var(--bdg-duration-fast) var(--bdg-ease), box-shadow var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-checkbox__input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: inherit;
+}
+.bdg-checkbox__mark { width: 14px; height: 14px; opacity: 0; transform: scale(0.6); transition: opacity var(--bdg-duration-fast) var(--bdg-ease), transform var(--bdg-duration-fast) var(--bdg-ease); }
+/* Sibling fallbacks for a WebView without :has() (audit DS-12 / UI-19): the tick shows in
+   the primary colour on the plain box and the focus ring sits on the mark. Where :has()
+   works, the higher-specificity rules below restore the filled box and its own ring. */
+.bdg-checkbox__input:checked + .bdg-checkbox__mark { opacity: 1; transform: scale(1); color: var(--bdg-color-primary); }
+.bdg-checkbox__input:focus-visible + .bdg-checkbox__mark { border-radius: 3px; box-shadow: var(--bdg-focus-ring); }
+.bdg-checkbox__box:has(.bdg-checkbox__input:checked) { background: var(--bdg-color-primary); border-color: var(--bdg-color-primary); }
+.bdg-checkbox__box:has(.bdg-checkbox__input:checked) .bdg-checkbox__mark { opacity: 1; transform: scale(1); color: var(--bdg-color-on-primary); }
+.bdg-checkbox__box:has(.bdg-checkbox__input:focus-visible) { box-shadow: var(--bdg-focus-ring); }
+.bdg-checkbox__box:has(.bdg-checkbox__input:focus-visible) .bdg-checkbox__mark { box-shadow: none; }
+.bdg-checkbox--error .bdg-checkbox__box { border-color: var(--bdg-color-negative); }
+.bdg-checkbox__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.bdg-checkbox__label { font-size: var(--bdg-text-md); line-height: var(--bdg-leading-snug); font-weight: var(--bdg-weight-medium); }
+.bdg-checkbox__description { font-size: var(--bdg-text-sm); line-height: var(--bdg-leading-snug); color: var(--bdg-color-text-muted); }
+
+/* Switch */
+.bdg-switch { display: inline-flex; align-items: flex-start; gap: var(--bdg-space-3); font-family: var(--bdg-font-sans); color: var(--bdg-color-text); }
+.bdg-switch--label-start { flex-direction: row-reverse; justify-content: flex-end; }
+.bdg-switch--disabled { opacity: 0.6; }
+.bdg-switch__track {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  flex: none;
+  width: 44px;
+  height: 26px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-border-strong);
+  cursor: pointer;
+  transition: background-color var(--bdg-duration-normal) var(--bdg-ease);
+}
+.bdg-switch--sm .bdg-switch__track { width: 36px; height: 22px; }
+/* Same trick as the alert dismiss: the track stays 44x26 to look right, while the
+   touch target reaches 44px tall. The thumb is a real child element, so ::after
+   is free for this. */
+.bdg-switch__track::after { content: ''; position: absolute; top: -9px; right: -2px; bottom: -9px; left: -2px; inset: -9px -2px; }
+.bdg-switch__track:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-switch__track:disabled { cursor: not-allowed; }
+.bdg-switch__track--on { background: var(--bdg-color-primary); }
+.bdg-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: var(--bdg-shadow-sm);
+  transition: transform var(--bdg-duration-normal) var(--bdg-ease);
+}
+.bdg-switch--sm .bdg-switch__thumb { width: 16px; height: 16px; }
+.bdg-switch__track--on .bdg-switch__thumb { transform: translateX(18px); }
+.bdg-switch--sm .bdg-switch__track--on .bdg-switch__thumb { transform: translateX(14px); }
+.bdg-switch__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; cursor: pointer; padding-top: 2px; }
+.bdg-switch__label { font-size: var(--bdg-text-md); line-height: var(--bdg-leading-snug); font-weight: var(--bdg-weight-medium); }
+.bdg-switch__description { font-size: var(--bdg-text-sm); line-height: var(--bdg-leading-snug); color: var(--bdg-color-text-muted); }

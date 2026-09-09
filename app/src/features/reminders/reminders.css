@@ -1,0 +1,33 @@
+/* Reminders - bell badge, list rows. Tokens only; nothing inside design-system components is restyled. */
+.reminders-button { position: relative; display: inline-flex; }
+.reminders-button__count { position: absolute; top: -6px; right: -6px; pointer-events: none; }
+.reminder-list { display: flex; flex-direction: column; border: 1px solid var(--bdg-color-border); border-radius: var(--bdg-radius-md); overflow: hidden; }
+.reminder-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--bdg-space-3);
+  padding: var(--bdg-space-3);
+  border-top: 1px solid var(--bdg-color-border);
+  background: var(--bdg-color-surface);
+}
+.reminder-row:first-child { border-top: 0; }
+.reminder-row__icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-surface-2);
+  font-size: 16px;
+  line-height: 1;
+}
+.reminder-row--danger .reminder-row__icon { background: var(--bdg-color-negative-soft); }
+.reminder-row--warning .reminder-row__icon { background: var(--bdg-color-warning-soft); }
+.reminder-row--info .reminder-row__icon { background: var(--bdg-color-info-soft); }
+.reminder-row--success .reminder-row__icon { background: var(--bdg-color-positive-soft); }
+.reminder-row__body { flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.reminder-row__title { font-weight: var(--bdg-weight-medium); }
+.reminder-row__actions { flex: none; display: flex; gap: var(--bdg-space-2); margin-left: auto; }
+.reminder-row--dismissed { opacity: 0.6; }

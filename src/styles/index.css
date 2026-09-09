@@ -1,0 +1,12 @@
+/* @budget-app/ui - stylesheet entry. Order matters: tokens first, then
+   base + utilities, then components (later files may reference earlier vars). */
+@import "./tokens.css";
+@import "./base.css";
+@import "./utilities.css";
+@import "./components/button.css";
+@import "./components/field.css";
+@import "./components/layout.css";
+@import "./components/household.css";
+@import "./components/feedback.css";
+@import "./components/finance.css";
+@import "./components/navigation.css";

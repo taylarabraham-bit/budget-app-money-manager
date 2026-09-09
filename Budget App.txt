@@ -1,0 +1,8 @@
+This will serve as the guide for building the budget app
+The app is for android and windows (APK,EXE)
+The app is for households to use so multiple users for one single household
+Each user needs to have their own personal budget
+This app is designed to be a budget app that is for creating goals, knowing what your daily earning totals
+This app will be connected with supabase server from my personal computer
+For now purchases should be logged manually, until i buy the right service
+

@@ -1,0 +1,139 @@
+/* Tone mapping shared by Badge, ProgressBar, Alert. --bdg-on-tone is the text colour
+   on a solid fill of the tone (audit DS-5 / UI-5). */
+.bdg-badge--neutral, .bdg-progress--neutral { --bdg-tone: var(--bdg-color-text-muted); --bdg-tone-soft: var(--bdg-color-surface-3); --bdg-on-tone: var(--bdg-color-text-inverse); }
+.bdg-badge--positive, .bdg-progress--positive, .bdg-alert--success { --bdg-tone: var(--bdg-color-positive); --bdg-tone-soft: var(--bdg-color-positive-soft); --bdg-on-tone: var(--bdg-color-on-positive); }
+.bdg-badge--negative, .bdg-progress--negative, .bdg-alert--danger { --bdg-tone: var(--bdg-color-negative); --bdg-tone-soft: var(--bdg-color-negative-soft); --bdg-on-tone: var(--bdg-color-on-negative); }
+.bdg-badge--warning, .bdg-progress--warning, .bdg-alert--warning { --bdg-tone: var(--bdg-color-warning); --bdg-tone-soft: var(--bdg-color-warning-soft); --bdg-on-tone: var(--bdg-color-on-warning); }
+.bdg-badge--info, .bdg-progress--info, .bdg-alert--info { --bdg-tone: var(--bdg-color-info); --bdg-tone-soft: var(--bdg-color-info-soft); --bdg-on-tone: var(--bdg-color-on-info); }
+.bdg-progress--primary { --bdg-tone: var(--bdg-color-primary); --bdg-tone-soft: var(--bdg-color-primary-soft); }
+.bdg-progress--coral { --bdg-tone: var(--bdg-member-coral); --bdg-tone-soft: var(--bdg-member-coral-soft); }
+.bdg-progress--violet { --bdg-tone: var(--bdg-member-violet); --bdg-tone-soft: var(--bdg-member-violet-soft); }
+.bdg-progress--sky { --bdg-tone: var(--bdg-member-sky); --bdg-tone-soft: var(--bdg-member-sky-soft); }
+.bdg-progress--lime { --bdg-tone: var(--bdg-member-lime); --bdg-tone-soft: var(--bdg-member-lime-soft); }
+.bdg-progress--rose { --bdg-tone: var(--bdg-member-rose); --bdg-tone-soft: var(--bdg-member-rose-soft); }
+.bdg-progress--amber { --bdg-tone: var(--bdg-member-amber); --bdg-tone-soft: var(--bdg-member-amber-soft); }
+
+/* Badge */
+.bdg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: var(--bdg-radius-full);
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-xs);
+  font-weight: var(--bdg-weight-semibold);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.bdg-badge--sm { height: 20px; padding: 0 8px; font-size: 11px; }
+.bdg-badge--soft { background: var(--bdg-tone-soft); color: var(--bdg-tone); }
+.bdg-badge--solid { background: var(--bdg-tone); color: var(--bdg-on-tone, var(--bdg-color-text-inverse)); }
+.bdg-badge--neutral.bdg-badge--solid { background: var(--bdg-color-text); color: var(--bdg-color-text-inverse); }
+.bdg-badge--outline { background: transparent; color: var(--bdg-tone); border-color: currentColor; }
+.bdg-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
+
+/* ProgressBar */
+.bdg-progress { display: flex; flex-direction: column; gap: var(--bdg-space-2); box-sizing: border-box; width: 100%; min-width: 0; font-family: var(--bdg-font-sans); color: var(--bdg-color-text); }
+.bdg-progress__header { display: flex; align-items: baseline; justify-content: space-between; gap: var(--bdg-space-3); font-size: var(--bdg-text-sm); line-height: var(--bdg-leading-snug); }
+.bdg-progress__label { font-weight: var(--bdg-weight-medium); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bdg-progress__value { color: var(--bdg-color-text-muted); font-variant-numeric: tabular-nums; flex: none; }
+.bdg-progress--over .bdg-progress__value { color: var(--bdg-color-negative); font-weight: var(--bdg-weight-semibold); }
+.bdg-progress__track { position: relative; width: 100%; height: 8px; overflow: hidden; border-radius: var(--bdg-radius-full); background: var(--bdg-tone-soft); }
+.bdg-progress--sm .bdg-progress__track { height: 4px; }
+.bdg-progress--lg .bdg-progress__track { height: 12px; }
+.bdg-progress__fill { height: 100%; width: 0; border-radius: inherit; background: var(--bdg-tone); transition: width var(--bdg-duration-normal) var(--bdg-ease); }
+.bdg-progress--over .bdg-progress__track { background: var(--bdg-color-negative-soft); }
+.bdg-progress--over .bdg-progress__fill { background: var(--bdg-color-negative); }
+.bdg-progress--indeterminate .bdg-progress__fill { position: absolute; left: 0; width: 40%; animation: bdg-progress-slide 1.2s var(--bdg-ease) infinite; }
+@keyframes bdg-progress-slide { from { transform: translateX(-100%); } to { transform: translateX(250%); } }
+
+/* Alert */
+.bdg-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--bdg-space-3);
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--bdg-space-3) var(--bdg-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--bdg-radius-md);
+  background: var(--bdg-tone-soft);
+  color: var(--bdg-color-text);
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-sm);
+  line-height: var(--bdg-leading-normal);
+  text-align: left;
+}
+.bdg-alert__icon { flex: none; width: 20px; height: 20px; margin-top: 1px; color: var(--bdg-tone); }
+.bdg-alert__icon > svg { width: 100%; height: 100%; }
+.bdg-alert__content { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0; }
+.bdg-alert__title { font-weight: var(--bdg-weight-semibold); color: var(--bdg-tone); }
+.bdg-alert__body { color: var(--bdg-color-text); }
+.bdg-alert__action { margin-top: var(--bdg-space-2); }
+.bdg-alert__action .bdg-button--ghost { color: var(--bdg-tone); }
+.bdg-alert__action .bdg-button--ghost:hover:not(:disabled) { background: var(--bdg-color-hover-overlay); }
+.bdg-alert__dismiss {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: -4px -6px -4px 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: transparent;
+  color: var(--bdg-color-text-muted);
+  cursor: pointer;
+}
+.bdg-alert__dismiss:hover { background: var(--bdg-color-hover-overlay); color: var(--bdg-color-text); }
+.bdg-alert__dismiss:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-alert__dismiss > svg { width: 18px; height: 18px; }
+/* The dismiss circle stays 28px visually, but a thumb gets a 44px target: the
+   invisible pad costs no layout because it is a positioned pseudo-element. */
+.bdg-alert__dismiss::after { content: ''; position: absolute; top: -8px; right: -8px; bottom: -8px; left: -8px; inset: -8px; }
+
+/* EmptyState */
+.bdg-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--bdg-space-2);
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--bdg-space-10) var(--bdg-space-6);
+  text-align: center;
+  font-family: var(--bdg-font-sans);
+  color: var(--bdg-color-text);
+}
+.bdg-empty--compact { padding: var(--bdg-space-6) var(--bdg-space-4); }
+.bdg-empty__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: var(--bdg-space-2);
+  border-radius: 50%;
+  background: var(--bdg-color-primary-soft);
+  color: var(--bdg-color-primary);
+  font-size: 28px;
+  line-height: 1;
+}
+.bdg-empty--compact .bdg-empty__icon { width: 48px; height: 48px; font-size: 22px; }
+.bdg-empty__icon > svg { width: 28px; height: 28px; }
+.bdg-empty__title { font-size: var(--bdg-text-lg); font-weight: var(--bdg-weight-semibold); line-height: var(--bdg-leading-snug); }
+.bdg-empty--compact .bdg-empty__title { font-size: var(--bdg-text-md); }
+.bdg-empty__description { max-width: 32ch; font-size: var(--bdg-text-sm); color: var(--bdg-color-text-muted); line-height: var(--bdg-leading-normal); }
+.bdg-empty__action { margin-top: var(--bdg-space-3); }

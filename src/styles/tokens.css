@@ -1,0 +1,181 @@
+/*
+ * @budget-app/ui - design tokens
+ *
+ * Every visual decision in the system resolves to one of these custom
+ * properties. Light theme lives on :root; dark theme is opt-in via
+ * [data-theme="dark"] on any ancestor (never auto-switched, so screens look
+ * the same in every host).
+ */
+:root {
+  /* Brand */
+  --bdg-color-primary: #0f766e;
+  --bdg-color-primary-hover: #115e59;
+  --bdg-color-primary-active: #134e4a;
+  --bdg-color-primary-soft: #ccfbf1;
+  --bdg-color-primary-soft-hover: #99f6e4;
+  --bdg-color-on-primary: #ffffff;
+  --bdg-color-accent: #d97706;
+  --bdg-color-accent-soft: #fef3c7;
+  --bdg-color-on-accent: #ffffff;
+
+  /* Semantic (money + status) */
+  --bdg-color-positive: #15803d;
+  --bdg-color-positive-soft: #dcfce7;
+  --bdg-color-negative: #dc2626;
+  --bdg-color-negative-soft: #fee2e2;
+  --bdg-color-warning: #b45309;
+  --bdg-color-warning-soft: #fef3c7;
+  --bdg-color-info: #1d4ed8;
+  --bdg-color-info-soft: #dbeafe;
+  /* Text on a solid tone fill - danger buttons, solid badges, the nav badge.
+     White here; the dark theme brightens the tones and swaps these to near-black,
+     as --bdg-color-on-primary already does (audit DS-5 / UI-5). */
+  --bdg-color-on-positive: #ffffff;
+  --bdg-color-on-negative: #ffffff;
+  --bdg-color-on-warning: #ffffff;
+  --bdg-color-on-info: #ffffff;
+
+  /* Neutrals */
+  --bdg-color-bg: #f6f6f3;
+  --bdg-color-surface: #ffffff;
+  --bdg-color-surface-2: #f1f1ee;
+  --bdg-color-surface-3: #e8e8e4;
+  --bdg-color-border: #e3e3df;
+  --bdg-color-border-strong: #c9c9c3;
+  --bdg-color-text: #1b1b19;
+  --bdg-color-text-muted: #6a6a64;
+  /* Captions at 11-12px (notes, "/mo", PENDING) read in this: 4.9:1 on a
+     surface and 4.5:1 on the page ground. The old #9b9b94 managed 2.8:1 (audit UI-6). */
+  --bdg-color-text-subtle: #71716b;
+  --bdg-color-text-inverse: #ffffff;
+  --bdg-color-overlay: rgba(20, 20, 18, 0.5);
+  /* Hover wash over a tinted surface (alert controls); flips to a white wash in the dark theme */
+  --bdg-color-hover-overlay: rgba(20, 20, 18, 0.06);
+
+  /* Household member colours (avatars, chips, category accents) */
+  --bdg-member-coral: #e0523f;
+  --bdg-member-coral-soft: #fde4e0;
+  --bdg-member-violet: #6d4aff;
+  --bdg-member-violet-soft: #e9e3ff;
+  --bdg-member-sky: #0284c7;
+  --bdg-member-sky-soft: #d6f0fb;
+  --bdg-member-lime: #4d7c0f;
+  --bdg-member-lime-soft: #e3f5c8;
+  --bdg-member-rose: #be185d;
+  --bdg-member-rose-soft: #fde0ec;
+  --bdg-member-amber: #b45309;
+  --bdg-member-amber-soft: #feeccb;
+
+  /* Typography */
+  --bdg-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bdg-font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --bdg-text-xs: 0.75rem;
+  --bdg-text-sm: 0.875rem;
+  --bdg-text-md: 1rem;
+  --bdg-text-lg: 1.125rem;
+  --bdg-text-xl: 1.375rem;
+  --bdg-text-2xl: 1.75rem;
+  --bdg-text-3xl: 2.25rem;
+  --bdg-text-4xl: 3rem;
+  --bdg-weight-regular: 400;
+  --bdg-weight-medium: 500;
+  --bdg-weight-semibold: 600;
+  --bdg-weight-bold: 700;
+  --bdg-leading-tight: 1.2;
+  --bdg-leading-snug: 1.35;
+  --bdg-leading-normal: 1.5;
+  --bdg-tracking-tight: -0.015em;
+  --bdg-tracking-wide: 0.04em;
+
+  /* Spacing (4px grid) */
+  --bdg-space-0: 0px;
+  --bdg-space-1: 4px;
+  --bdg-space-2: 8px;
+  --bdg-space-3: 12px;
+  --bdg-space-4: 16px;
+  --bdg-space-5: 20px;
+  --bdg-space-6: 24px;
+  --bdg-space-8: 32px;
+  --bdg-space-10: 40px;
+  --bdg-space-12: 48px;
+  --bdg-space-16: 64px;
+
+  /* Radius */
+  --bdg-radius-sm: 6px;
+  --bdg-radius-md: 10px;
+  --bdg-radius-lg: 14px;
+  --bdg-radius-xl: 20px;
+  --bdg-radius-full: 999px;
+
+  /* Elevation */
+  --bdg-shadow-sm: 0 1px 2px rgba(20, 20, 18, 0.06), 0 1px 1px rgba(20, 20, 18, 0.04);
+  --bdg-shadow-md: 0 4px 12px rgba(20, 20, 18, 0.08), 0 1px 3px rgba(20, 20, 18, 0.06);
+  --bdg-shadow-lg: 0 16px 40px rgba(20, 20, 18, 0.18), 0 2px 6px rgba(20, 20, 18, 0.08);
+
+  /* Focus, motion, sizing */
+  --bdg-focus-ring: 0 0 0 3px rgba(15, 118, 110, 0.32);
+  --bdg-duration-fast: 120ms;
+  --bdg-duration-normal: 200ms;
+  --bdg-ease: cubic-bezier(0.2, 0, 0, 1);
+  --bdg-control-sm: 32px;
+  --bdg-control-md: 40px;
+  --bdg-control-lg: 48px;
+  --bdg-screen-max: 420px;
+  --bdg-container-max: 1080px;
+}
+
+[data-theme="dark"] {
+  --bdg-color-primary: #2dd4bf;
+  --bdg-color-primary-hover: #5eead4;
+  --bdg-color-primary-active: #99f6e4;
+  --bdg-color-primary-soft: rgba(45, 212, 191, 0.16);
+  --bdg-color-primary-soft-hover: rgba(45, 212, 191, 0.26);
+  --bdg-color-on-primary: #0b2f2b;
+  --bdg-color-accent: #fbbf24;
+  --bdg-color-accent-soft: rgba(251, 191, 36, 0.18);
+  --bdg-color-on-accent: #3a2503;
+
+  --bdg-color-positive: #4ade80;
+  --bdg-color-positive-soft: rgba(74, 222, 128, 0.16);
+  --bdg-color-negative: #f87171;
+  --bdg-color-negative-soft: rgba(248, 113, 113, 0.16);
+  --bdg-color-warning: #fbbf24;
+  --bdg-color-warning-soft: rgba(251, 191, 36, 0.16);
+  --bdg-color-info: #60a5fa;
+  --bdg-color-info-soft: rgba(96, 165, 250, 0.16);
+  --bdg-color-on-positive: #052e16;
+  --bdg-color-on-negative: #3b0a0a;
+  --bdg-color-on-warning: #3a2503;
+  --bdg-color-on-info: #0b1f3f;
+
+  --bdg-color-bg: #121311;
+  --bdg-color-surface: #1b1c19;
+  --bdg-color-surface-2: #232421;
+  --bdg-color-surface-3: #2c2d29;
+  --bdg-color-border: #30312d;
+  --bdg-color-border-strong: #45463f;
+  --bdg-color-text: #f2f2ee;
+  --bdg-color-text-muted: #a3a39c;
+  --bdg-color-text-subtle: #8f8f88;
+  --bdg-color-text-inverse: #121311;
+  --bdg-color-overlay: rgba(0, 0, 0, 0.6);
+  --bdg-color-hover-overlay: rgba(255, 255, 255, 0.08);
+
+  --bdg-member-coral: #ff8a78;
+  --bdg-member-coral-soft: rgba(255, 138, 120, 0.18);
+  --bdg-member-violet: #a78bfa;
+  --bdg-member-violet-soft: rgba(167, 139, 250, 0.18);
+  --bdg-member-sky: #38bdf8;
+  --bdg-member-sky-soft: rgba(56, 189, 248, 0.18);
+  --bdg-member-lime: #a3e635;
+  --bdg-member-lime-soft: rgba(163, 230, 53, 0.18);
+  --bdg-member-rose: #f472b6;
+  --bdg-member-rose-soft: rgba(244, 114, 182, 0.18);
+  --bdg-member-amber: #fbbf24;
+  --bdg-member-amber-soft: rgba(251, 191, 36, 0.18);
+
+  --bdg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --bdg-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.45);
+  --bdg-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --bdg-focus-ring: 0 0 0 3px rgba(45, 212, 191, 0.4);
+}

@@ -1,0 +1,26 @@
+node_modules/
+dist/
+# the APK's web bundle (built with the real env baked in) - kept apart from app/dist, the env-stripped test build
+dist-android/
+
+# design-sync machine state (regenerated; never committed)
+.ds-sync/
+ds-bundle/
+.design-sync/.cache/
+.design-sync/learnings/
+.design-sync/node_modules
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# local env files (Supabase URL / anon key for the dev build)
+.env.local
+.env.*.local
+
+# harness results (written to the cwd by app/harness/run.mjs)
+results-*.json
+
+# vitest --coverage output (audit INF-7)
+coverage/

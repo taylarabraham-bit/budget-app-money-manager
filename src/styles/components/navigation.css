@@ -1,0 +1,239 @@
+/* Tabs */
+.bdg-tabs { box-sizing: border-box; min-width: 0; max-width: 100%; font-family: var(--bdg-font-sans); color: var(--bdg-color-text); }
+.bdg-tabs__list { display: inline-flex; align-items: stretch; gap: var(--bdg-space-1); max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.bdg-tabs__list::-webkit-scrollbar { display: none; }
+.bdg-tabs--full .bdg-tabs__list { display: flex; width: 100%; }
+.bdg-tabs--full .bdg-tabs__tab { flex: 1 1 0; justify-content: center; }
+.bdg-tabs__tab {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0 var(--bdg-space-3);
+  min-height: var(--bdg-control-md);
+  border: 0;
+  background: transparent;
+  color: var(--bdg-color-text-muted);
+  font-family: inherit;
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--bdg-duration-fast) var(--bdg-ease), background-color var(--bdg-duration-fast) var(--bdg-ease), box-shadow var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-tabs--sm .bdg-tabs__tab { min-height: var(--bdg-control-sm); font-size: var(--bdg-text-xs); padding: 0 var(--bdg-space-2); }
+.bdg-tabs__tab:disabled { cursor: not-allowed; opacity: 0.5; }
+.bdg-tabs__tab:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); border-radius: var(--bdg-radius-sm); }
+.bdg-tabs__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-surface-3);
+  color: var(--bdg-color-text-muted);
+  font-size: 11px;
+  font-weight: var(--bdg-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+/* underline variant */
+.bdg-tabs--underline .bdg-tabs__list { border-bottom: 1px solid var(--bdg-color-border); }
+.bdg-tabs--underline .bdg-tabs__tab { position: relative; }
+.bdg-tabs--underline .bdg-tabs__tab::after { content: ""; position: absolute; left: var(--bdg-space-2); right: var(--bdg-space-2); bottom: -1px; height: 2px; border-radius: 2px 2px 0 0; background: transparent; transition: background-color var(--bdg-duration-fast) var(--bdg-ease); }
+.bdg-tabs--underline .bdg-tabs__tab:hover:not(:disabled) { color: var(--bdg-color-text); }
+.bdg-tabs--underline .bdg-tabs__tab--active { color: var(--bdg-color-primary); }
+.bdg-tabs--underline .bdg-tabs__tab--active::after { background: var(--bdg-color-primary); }
+.bdg-tabs--underline .bdg-tabs__tab--active .bdg-tabs__count { background: var(--bdg-color-primary-soft); color: var(--bdg-color-primary); }
+/* segmented variant */
+.bdg-tabs--segmented .bdg-tabs__list { padding: 3px; gap: 2px; border-radius: var(--bdg-radius-md); background: var(--bdg-color-surface-3); }
+.bdg-tabs--segmented .bdg-tabs__tab { min-height: calc(var(--bdg-control-md) - 6px); border-radius: calc(var(--bdg-radius-md) - 3px); }
+.bdg-tabs--segmented.bdg-tabs--sm .bdg-tabs__tab { min-height: calc(var(--bdg-control-sm) - 6px); }
+.bdg-tabs--segmented .bdg-tabs__tab:hover:not(:disabled) { color: var(--bdg-color-text); }
+.bdg-tabs--segmented .bdg-tabs__tab--active { background: var(--bdg-color-surface); color: var(--bdg-color-text); box-shadow: var(--bdg-shadow-sm); font-weight: var(--bdg-weight-semibold); }
+
+/* BottomNav */
+.bdg-bottom-nav {
+  display: flex;
+  align-items: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 64px;
+  padding: 6px var(--bdg-space-2) calc(6px + env(safe-area-inset-bottom, 0px));
+  background: var(--bdg-color-surface);
+  border-top: 1px solid var(--bdg-color-border);
+  font-family: var(--bdg-font-sans);
+  color: var(--bdg-color-text-muted);
+}
+.bdg-bottom-nav--fixed { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; box-shadow: var(--bdg-shadow-lg); }
+.bdg-bottom-nav__item {
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: 4px 2px;
+  border: 0;
+  border-radius: var(--bdg-radius-md);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  cursor: pointer;
+  transition: color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-bottom-nav__item:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-bottom-nav__item--active { color: var(--bdg-color-primary); }
+.bdg-bottom-nav__icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 28px;
+  border-radius: var(--bdg-radius-full);
+  font-size: 20px;
+  line-height: 1;
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-bottom-nav__icon > svg { width: 24px; height: 24px; }
+.bdg-bottom-nav__item--active .bdg-bottom-nav__icon { background: var(--bdg-color-primary-soft); }
+.bdg-bottom-nav__badge {
+  position: absolute;
+  top: -2px;
+  right: 6px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-negative);
+  color: var(--bdg-color-on-negative);
+  font-size: 10px;
+  font-weight: var(--bdg-weight-bold);
+  line-height: 16px;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--bdg-color-surface);
+}
+.bdg-bottom-nav__label { font-size: 11px; font-weight: var(--bdg-weight-medium); line-height: 1.2; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* Six equal slots across a 360px phone leave ~47px each, and "Household" needs 54
+   at 11px - it was rendering as "Househo...". Reclaiming the item's side padding
+   and shaving the label lets the longest tab name fit whole; the icon above it is
+   what carries the 48px touch target, so nothing gets harder to hit. */
+.bdg-bottom-nav__item--active .bdg-bottom-nav__label { font-weight: var(--bdg-weight-semibold); }
+/* With a centre action the destinations sit in two equal halves and the action
+   slot has a fixed width, so the "+" is on the centre line whatever the item
+   count. Equal slots for six children put it at 58% with five destinations
+   (audit DS-10); the three-item half now shares its width three ways. */
+.bdg-bottom-nav__group { display: flex; align-items: stretch; flex: 1 1 0; min-width: 0; }
+.bdg-bottom-nav__action-slot { display: flex; align-items: center; justify-content: center; flex: none; width: 64px; }
+/* Three destinations in half of a 360px phone leave ~50px each once the slot is
+   no wider than the "+" itself and the bar's side padding is halved; "Overview"
+   needs 42 at 10px. The icon above the label carries the 48px touch target, so
+   nothing gets harder to hit. */
+@media (max-width: 390px) {
+  .bdg-bottom-nav { padding-left: var(--bdg-space-1); padding-right: var(--bdg-space-1); }
+  .bdg-bottom-nav__item { padding-left: 0; padding-right: 0; }
+  .bdg-bottom-nav__label { font-size: 10px; letter-spacing: -0.01em; }
+  .bdg-bottom-nav__action-slot { width: 52px; }
+}
+@media (max-width: 330px) {
+  .bdg-bottom-nav__label { font-size: 9.5px; letter-spacing: -0.02em; }
+}
+/* A folding phone's cover screen (the original Fold is 280px) cannot both centre
+   the "+" and keep every label whole: there the halves size to their contents,
+   so the longest name still fits and the "+" sits a little right of centre. */
+@media (max-width: 300px) {
+  .bdg-bottom-nav__label { font-size: 9px; }
+  .bdg-bottom-nav__item { gap: 2px; }
+  .bdg-bottom-nav__group { flex: 1 1 auto; }
+}
+.bdg-bottom-nav__action {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: -22px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-primary);
+  color: var(--bdg-color-on-primary);
+  font-size: 26px;
+  line-height: 1;
+  box-shadow: var(--bdg-shadow-md), 0 0 0 4px var(--bdg-color-surface);
+  cursor: pointer;
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease), transform var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-bottom-nav__action > span { display: inline-flex; }
+.bdg-bottom-nav__action svg { width: 26px; height: 26px; }
+.bdg-bottom-nav__action:hover { background: var(--bdg-color-primary-hover); }
+.bdg-bottom-nav__action:active { transform: scale(0.96); }
+.bdg-bottom-nav__action:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring), 0 0 0 4px var(--bdg-color-surface); }
+
+/* Dialog. The edge longhands come before `inset` so a WebView older than
+   Chrome 87 still gets a full-screen container (audit DS-12 / UI-19);
+   overscroll-behavior keeps a flick past the end of the body from scrolling
+   the page underneath, which the Dialog also locks while open (audit UI-4 / DS-15). */
+.bdg-dialog { position: fixed; top: 0; right: 0; bottom: 0; left: 0; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; padding: var(--bdg-space-4); box-sizing: border-box; overscroll-behavior: contain; font-family: var(--bdg-font-sans); color: var(--bdg-color-text); }
+.bdg-dialog__scrim { position: absolute; top: 0; right: 0; bottom: 0; left: 0; inset: 0; background: var(--bdg-color-overlay); }
+.bdg-dialog__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 440px;
+  max-height: calc(100% - var(--bdg-space-8));
+  background: var(--bdg-color-surface);
+  border-radius: var(--bdg-radius-xl);
+  box-shadow: var(--bdg-shadow-lg);
+  overflow: hidden;
+}
+/* The panel takes focus itself when nothing inside can; the modal needs no ring of its own. */
+.bdg-dialog__panel:focus-visible { outline: none; box-shadow: var(--bdg-shadow-lg); }
+.bdg-dialog--sm .bdg-dialog__panel { max-width: 360px; }
+.bdg-dialog--lg .bdg-dialog__panel { max-width: 560px; }
+.bdg-dialog__header { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--bdg-space-3); padding: var(--bdg-space-5) var(--bdg-space-5) 0; }
+.bdg-dialog__heading { display: flex; flex-direction: column; gap: var(--bdg-space-1); min-width: 0; }
+/* An unbroken merchant name or URL wraps instead of widening the sheet (audit UX-15) */
+.bdg-dialog__title { margin: 0; min-width: 0; overflow-wrap: anywhere; font-size: var(--bdg-text-lg); font-weight: var(--bdg-weight-bold); line-height: var(--bdg-leading-snug); letter-spacing: var(--bdg-tracking-tight); }
+.bdg-dialog__description { margin: 0; font-size: var(--bdg-text-sm); color: var(--bdg-color-text-muted); line-height: var(--bdg-leading-normal); }
+.bdg-dialog__close {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin: -6px -8px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: transparent;
+  color: var(--bdg-color-text-muted);
+  cursor: pointer;
+}
+.bdg-dialog__close:hover { background: var(--bdg-color-surface-2); color: var(--bdg-color-text); }
+.bdg-dialog__close:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-dialog__close > svg { width: 20px; height: 20px; }
+.bdg-dialog__body { padding: var(--bdg-space-4) var(--bdg-space-5); overflow-y: auto; overscroll-behavior: contain; }
+.bdg-dialog__footer { display: flex; justify-content: flex-end; gap: var(--bdg-space-2); padding: var(--bdg-space-3) var(--bdg-space-5) var(--bdg-space-5); }
+@media (max-width: 520px) {
+  .bdg-dialog--sheet { align-items: flex-end; padding: 0; }
+  .bdg-dialog--sheet .bdg-dialog__panel { max-width: none; max-height: 92%; border-radius: var(--bdg-radius-xl) var(--bdg-radius-xl) 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .bdg-dialog--sheet .bdg-dialog__footer { flex-direction: column-reverse; }
+  .bdg-dialog--sheet .bdg-dialog__footer > * { width: 100%; }
+}

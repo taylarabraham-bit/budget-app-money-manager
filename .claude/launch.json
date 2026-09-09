@@ -1,0 +1,60 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "budget-app",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "app", "--host", "127.0.0.1", "--port", "5173", "--strictPort"],
+      "port": 5173
+    },
+    {
+      "name": "budget-app-5174",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "app", "--host", "127.0.0.1", "--port", "5174", "--strictPort"],
+      "port": 5174
+    },
+    {
+      "name": "budget-app-5175",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "app", "--host", "127.0.0.1", "--port", "5175", "--strictPort"],
+      "port": 5175
+    },
+    {
+      "name": "budget-app-5176",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "app", "--host", "127.0.0.1", "--port", "5176", "--strictPort"],
+      "port": 5176
+    },
+    {
+      "name": "app-preview",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "preview", "app", "--host", "127.0.0.1", "--port", "4173", "--strictPort"],
+      "port": 4173
+    },
+    {
+      "name": "ds-review",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": [".ds-sync/storybook/serve-review.mjs", "ds-bundle"],
+      "port": 4413
+    },
+    {
+      "name": "demo",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["scripts/demo.mjs"],
+      "port": 5173,
+      "autoPort": true
+    },
+    {
+      "name": "ui-audit",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "preview", "app", "--host", "127.0.0.1", "--port", "4174", "--strictPort"],
+      "port": 4174
+    },
+    {
+      "name": "budget-app-uitest",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "app", "--mode", "uitest", "--host", "127.0.0.1", "--port", "5177", "--strictPort"],
+      "port": 5177
+    }
+  ]
+}

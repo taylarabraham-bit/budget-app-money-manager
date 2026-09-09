@@ -1,0 +1,40 @@
+/*
+ * Layout utilities - the only "glue" classes in the system. Use them for
+ * arranging components; never for restyling a component's insides.
+ */
+.bdg-stack { display: flex; flex-direction: column; gap: var(--bdg-space-4); }
+.bdg-row { display: flex; flex-direction: row; align-items: center; gap: var(--bdg-space-3); }
+.bdg-row-between { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: var(--bdg-space-3); }
+.bdg-wrap { flex-wrap: wrap; }
+.bdg-grow { flex: 1 1 auto; min-width: 0; }
+.bdg-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--bdg-space-3); }
+.bdg-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--bdg-space-3); }
+.bdg-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--bdg-space-3); }
+
+.bdg-gap-1 { gap: var(--bdg-space-1); }
+.bdg-gap-2 { gap: var(--bdg-space-2); }
+.bdg-gap-3 { gap: var(--bdg-space-3); }
+.bdg-gap-4 { gap: var(--bdg-space-4); }
+.bdg-gap-6 { gap: var(--bdg-space-6); }
+.bdg-gap-8 { gap: var(--bdg-space-8); }
+
+.bdg-section-title {
+  margin: 0;
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-semibold);
+  letter-spacing: var(--bdg-tracking-wide);
+  text-transform: uppercase;
+  color: var(--bdg-color-text-muted);
+}
+.bdg-text-xs { font-size: var(--bdg-text-xs); }
+.bdg-text-sm { font-size: var(--bdg-text-sm); }
+.bdg-text-lg { font-size: var(--bdg-text-lg); }
+.bdg-text-muted { color: var(--bdg-color-text-muted); }
+.bdg-text-subtle { color: var(--bdg-color-text-subtle); }
+.bdg-text-positive { color: var(--bdg-color-positive); }
+.bdg-text-negative { color: var(--bdg-color-negative); }
+.bdg-font-medium { font-weight: var(--bdg-weight-medium); }
+.bdg-font-semibold { font-weight: var(--bdg-weight-semibold); }
+.bdg-tabular { font-variant-numeric: tabular-nums; }
+.bdg-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -1,0 +1,20 @@
+# Weekly dependency updates, grouped so one PR carries the routine bumps
+# (audit INF-16). Majors of Vite, its React plugin and Vitest move together
+# and are reviewed by hand, so they are left out of the group.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      routine:
+        patterns: ['*']
+        update-types: ['minor', 'patch']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday

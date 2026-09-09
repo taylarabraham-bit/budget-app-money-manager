@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Status-bar icon for reminders: the wallet mark as a white silhouette (Android tints it with iconColor). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- wallet body -->
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M4,6 C4,4.9 4.9,4 6,4 L18,4 C19.1,4 20,4.9 20,6 L20,18 C20,19.1 19.1,20 18,20 L6,20 C4.9,20 4,19.1 4,18 Z" />
+    <!-- clasp cut-out -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M13,10.5 L18.5,10.5 C19.3,10.5 20,11.2 20,12 L20,14.5 C20,15.3 19.3,16 18.5,16 L13,16 C12.2,16 11.5,15.3 11.5,14.5 L11.5,12 C11.5,11.2 12.2,10.5 13,10.5 Z" />
+</vector>

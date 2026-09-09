@@ -1,0 +1,123 @@
+/* Card */
+.bdg-card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--bdg-color-surface);
+  border: 1px solid var(--bdg-color-border);
+  border-radius: var(--bdg-radius-lg);
+  font-family: var(--bdg-font-sans);
+  color: var(--bdg-color-text);
+  text-align: left;
+  transition: box-shadow var(--bdg-duration-fast) var(--bdg-ease), transform var(--bdg-duration-fast) var(--bdg-ease), border-color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.bdg-card--elevated { border-color: transparent; box-shadow: var(--bdg-shadow-md); }
+.bdg-card--interactive { cursor: pointer; }
+.bdg-card--interactive:hover { border-color: var(--bdg-color-border-strong); box-shadow: var(--bdg-shadow-md); }
+.bdg-card--interactive:active { transform: translateY(1px); }
+.bdg-card--interactive:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-card--pad-none { --bdg-card-pad: 0px; }
+.bdg-card--pad-sm { --bdg-card-pad: var(--bdg-space-3); }
+.bdg-card--pad-md { --bdg-card-pad: var(--bdg-space-4); }
+.bdg-card--pad-lg { --bdg-card-pad: var(--bdg-space-6); }
+.bdg-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--bdg-space-3);
+  padding: var(--bdg-card-pad) var(--bdg-card-pad) 0;
+}
+.bdg-card--pad-none .bdg-card__header { padding: var(--bdg-space-4) var(--bdg-space-4) 0; }
+.bdg-card__heading { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+/* A heading element now (audit UI-27): margin reset so it sits where the div did */
+.bdg-card__title { margin: 0; font-size: var(--bdg-text-md); font-weight: var(--bdg-weight-semibold); line-height: var(--bdg-leading-snug); }
+.bdg-card__subtitle { font-size: var(--bdg-text-sm); color: var(--bdg-color-text-muted); line-height: var(--bdg-leading-snug); }
+.bdg-card__actions { display: flex; align-items: center; gap: var(--bdg-space-2); flex: none; }
+.bdg-card__body { padding: var(--bdg-card-pad); min-width: 0; }
+.bdg-card__header + .bdg-card__body { padding-top: var(--bdg-space-3); }
+.bdg-card__footer {
+  padding: var(--bdg-space-3) var(--bdg-card-pad);
+  border-top: 1px solid var(--bdg-color-border);
+  font-size: var(--bdg-text-sm);
+  color: var(--bdg-color-text-muted);
+}
+.bdg-card--pad-none .bdg-card__footer { padding: var(--bdg-space-3) var(--bdg-space-4); }
+
+/* PageHeader */
+.bdg-page-header {
+  display: flex;
+  align-items: center;
+  /* Actions wrap to their own row rather than eating the title. A screen with a
+     text action ("+ Add member") plus the bell and avatar needs ~215px, which on
+     a 360px phone - the commonest Android width - left "Household" rendering as
+     "Hous...". The floor on __text below is what triggers the wrap; above about
+     412px everything still sits on one row exactly as before. */
+  flex-wrap: wrap;
+  gap: var(--bdg-space-3);
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: var(--bdg-space-2) 0 var(--bdg-space-3);
+  font-family: var(--bdg-font-sans);
+  color: var(--bdg-color-text);
+}
+.bdg-page-header__back {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--bdg-control-md);
+  height: var(--bdg-control-md);
+  margin: 0 0 0 calc(-1 * var(--bdg-space-2));
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: transparent;
+  color: var(--bdg-color-text);
+  cursor: pointer;
+}
+.bdg-page-header__back:hover { background: var(--bdg-color-surface-2); }
+.bdg-page-header__back:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.bdg-page-header__back > svg { width: 22px; height: 22px; }
+.bdg-page-header__leading { display: flex; flex: none; }
+/* 9rem is a shade more than the longest screen title needs at --bdg-text-2xl;
+   below that the actions wrap instead of the title truncating. `min()` keeps it
+   from overflowing a viewport narrower than the floor itself. */
+.bdg-page-header__text { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: min(9rem, 100%); }
+.bdg-page-header__eyebrow {
+  font-size: var(--bdg-text-xs);
+  font-weight: var(--bdg-weight-semibold);
+  letter-spacing: var(--bdg-tracking-wide);
+  text-transform: uppercase;
+  color: var(--bdg-color-primary);
+}
+.bdg-page-header__title {
+  margin: 0;
+  font-size: var(--bdg-text-xl);
+  font-weight: var(--bdg-weight-bold);
+  line-height: var(--bdg-leading-tight);
+  letter-spacing: var(--bdg-tracking-tight);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bdg-page-header--lg .bdg-page-header__title { font-size: var(--bdg-text-2xl); }
+.bdg-page-header__subtitle { font-size: var(--bdg-text-sm); color: var(--bdg-color-text-muted); line-height: var(--bdg-leading-snug); }
+/* margin-left:auto keeps the actions right-aligned whether they share the title's
+   row or wrap onto their own. The cluster is content-sized, so on its own it can
+   still be wider than the screen and push the page sideways - a header carrying
+   two text actions plus the bell and avatar did exactly that at 280px. Capping it
+   and letting it wrap internally means the overflow becomes a second row instead. */
+.bdg-page-header__actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--bdg-space-2);
+  flex: none;
+  max-width: 100%;
+  margin-left: auto;
+}

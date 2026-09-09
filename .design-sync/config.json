@@ -1,0 +1,51 @@
+{
+  "projectId": "b3971e2f-5ba8-4fca-917c-9a28f338be86",
+  "shape": "package",
+  "pkg": "@budget-app/ui",
+  "globalName": "BudgetUI",
+  "buildCmd": "npm run build",
+  "entry": "./dist/index.js",
+  "cssEntry": "dist/styles.css",
+  "docsDir": "docs/components",
+  "readmeHeader": ".design-sync/conventions.md",
+  "overrides": {
+    "Alert": {
+      "cardMode": "column"
+    },
+    "BottomNav": {
+      "cardMode": "column"
+    },
+    "BudgetBar": {
+      "cardMode": "column"
+    },
+    "Card": {
+      "cardMode": "column"
+    },
+    "Dialog": {
+      "cardMode": "single",
+      "primaryStory": "LogPurchase",
+      "viewport": "560x640"
+    },
+    "GoalCard": {
+      "cardMode": "column"
+    },
+    "PageHeader": {
+      "cardMode": "column"
+    },
+    "StatCard": {
+      "cardMode": "column"
+    },
+    "Tabs": {
+      "cardMode": "column"
+    },
+    "TransactionItem": {
+      "cardMode": "column"
+    },
+    "TransactionList": {
+      "cardMode": "column"
+    },
+    "TrendBars": {
+      "cardMode": "column"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+/* Settle-up layout glue - tokens only; component looks come from @budget-app/ui. */
+.settle { width: 100%; max-width: 760px; margin: 0 auto; }
+.balance-card__hero { display: flex; align-items: baseline; gap: var(--bdg-space-2); flex-wrap: wrap; }
+.balance-card__sentence { font-size: var(--bdg-text-lg); font-weight: var(--bdg-weight-semibold); }
+.balance-card__breakdown { display: grid; gap: var(--bdg-space-1); font-size: var(--bdg-text-sm); }
+.balance-card__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--bdg-space-2); font-size: var(--bdg-text-xs); color: var(--bdg-color-text-muted); }
+.balance-card__actions { display: flex; flex-wrap: wrap; gap: var(--bdg-space-2); }
+.split-settings__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--bdg-space-3); }
+@media (max-width: 480px) {
+  .split-settings__grid { grid-template-columns: minmax(0, 1fr); }
+}

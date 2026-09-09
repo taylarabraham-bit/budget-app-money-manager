@@ -1,0 +1,129 @@
+/* Household screen - app-level glue around design-system components.
+   Tokens only; no design-system internals are restyled. */
+
+.household {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Member cards */
+.household-member__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--bdg-space-3);
+  flex-wrap: wrap;
+}
+.household-member__left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: var(--bdg-leading-tight);
+}
+.household-member__left-label {
+  font-size: var(--bdg-text-xs);
+  color: var(--bdg-color-text-muted);
+}
+.household-member__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--bdg-space-2);
+  font-size: var(--bdg-text-xs);
+  color: var(--bdg-color-text-muted);
+}
+.household-member__facts > * + *::before {
+  content: "\00B7";
+  margin-right: var(--bdg-space-2);
+  color: var(--bdg-color-text-subtle);
+}
+.household-member__actions {
+  display: flex;
+  gap: var(--bdg-space-2);
+  flex-wrap: wrap;
+}
+@media (min-width: 900px) {
+  .household-members {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--bdg-space-4);
+  }
+}
+
+/* Settings facts (household card) */
+.household-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bdg-space-3);
+}
+.household-facts__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.household-facts__label {
+  font-size: var(--bdg-text-xs);
+  color: var(--bdg-color-text-muted);
+}
+.household-facts__value {
+  font-weight: var(--bdg-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Member colour picker (MemberDialog) */
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bdg-space-2);
+}
+.color-picker__label {
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+}
+.color-picker__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bdg-space-2);
+}
+.color-picker__option {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: var(--bdg-radius-full);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.color-picker__option:hover {
+  border-color: var(--bdg-color-border-strong);
+}
+.color-picker__option[aria-checked="true"] {
+  border-color: var(--bdg-color-primary);
+}
+.color-picker__option:focus-visible {
+  outline: none;
+  box-shadow: var(--bdg-focus-ring);
+}
+
+/* Member detail dialog */
+.member-detail__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bdg-space-2);
+}
+.member-detail__rows {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--bdg-color-border);
+  border-radius: var(--bdg-radius-md);
+  overflow: hidden;
+}

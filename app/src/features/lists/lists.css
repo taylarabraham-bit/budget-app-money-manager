@@ -1,0 +1,49 @@
+/* Lists - shopping and wish list. Reuses the bills row/sheet/group styles for
+   the wish rows and sheets; shopping rows are checkbox rows. Tokens only. */
+@import '../bills/bills.css';
+
+.lists { width: 100%; max-width: 760px; margin: 0 auto; }
+
+/* Quick-add form at the top of the shopping list */
+.list-add { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--bdg-space-2); align-items: end; }
+@media (min-width: 480px) {
+  .list-add { grid-template-columns: minmax(0, 1fr) 140px auto; }
+}
+
+/* A shopping-list row: the checkbox owns the label; actions sit beside it so no control nests */
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--bdg-space-3);
+  padding: var(--bdg-space-3) var(--bdg-space-4);
+  border-top: 1px solid var(--bdg-color-border);
+}
+.list-row:first-child { border-top: 0; }
+.list-row > :first-child { flex: 1 1 auto; min-width: 0; }
+.list-row__name { font-weight: var(--bdg-weight-medium); }
+.list-row--checked .list-row__name { text-decoration: line-through; color: var(--bdg-color-text-muted); }
+.list-row__trailing { flex: none; display: flex; align-items: center; gap: var(--bdg-space-2); }
+
+/* Wish sheet link */
+.list-sheet__link { color: var(--bdg-color-primary); display: inline-block; max-width: 100%; }
+
+/* Footer link on the Overview card */
+.lists-card__wish {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  padding: var(--bdg-space-1) 0;
+  border: 0;
+  background: none;
+  color: var(--bdg-color-primary);
+  font: inherit;
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+  cursor: pointer;
+}
+/* A one-line text button is only 29px tall; the pad gives a thumb 41px without
+   moving anything around it (see .bdg-alert__dismiss for the same trick). */
+.lists-card__wish { position: relative; }
+.lists-card__wish::after { content: ''; position: absolute; inset: -6px 0; }
+.lists-card__wish:hover { text-decoration: underline; }
+.lists-card__wish:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); border-radius: var(--bdg-radius-sm); }

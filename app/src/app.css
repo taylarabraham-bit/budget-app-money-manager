@@ -1,0 +1,255 @@
+/*
+ * App-level layout glue. Everything here is arrangement (frames, sidebar,
+ * responsive columns) expressed with --bdg-* tokens; component looks come
+ * from @budget-app/ui.
+ */
+html, body, #root { margin: 0; min-height: 100%; }
+body { background: var(--bdg-color-bg); }
+
+/* Packaged builds draw edge-to-edge (Android 15 enforces it): keep the app
+   below the status bar. Zero in ordinary browsers; the bottom inset is already
+   handled by the bottom nav's own padding. */
+.app { min-height: 100vh; padding-top: env(safe-area-inset-top, 0px); }
+
+/* Theme (explicit toggle in Settings; SettingsProvider puts data-theme on <html> too,
+   so the page background and native controls follow the design-system tokens). */
+html[data-theme="dark"] { color-scheme: dark; }
+
+/* The signed-in avatar in PageHeader actions doubles as the Settings button */
+.app-avatar-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--bdg-radius-full);
+  background: none;
+  cursor: pointer;
+}
+.app-avatar-button:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.app-side__brand--button {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--bdg-radius-md);
+}
+.app-side__brand--button:hover { background: var(--bdg-color-surface-2); }
+.app-side__brand--button:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+/* Setup wizard replaces the shell: no sidebar grid (doubled class outranks the desktop grid rule below) */
+.app.app--setup { display: block; }
+/* Shown above the tab content while the sample household is on screen */
+.sample-banner { margin-bottom: var(--bdg-space-4); }
+
+/* Overview stat row: two columns on phones (the third card spans), three on desktop */
+.overview-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.overview-stats > :nth-child(3) { grid-column: 1 / -1; }
+@media (min-width: 900px) {
+  .overview-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .overview-stats > :nth-child(3) { grid-column: auto; }
+}
+
+/* Suggestion chips (recent merchants, favourites): one scrolling line on phones, wrapping on desktop */
+.chip-row {
+  display: flex;
+  align-items: center;
+  gap: var(--bdg-space-2);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.chip-row::-webkit-scrollbar { display: none; }
+.chip-row__chip {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bdg-space-1);
+  min-height: var(--bdg-control-sm);
+  margin: 0;
+  padding: 0 var(--bdg-space-3);
+  border: 1px solid var(--bdg-color-border-strong);
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-surface);
+  color: var(--bdg-color-text);
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-sm);
+  white-space: nowrap;
+  max-width: 260px;
+  cursor: pointer;
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease), border-color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.chip-row__chip-label { overflow: hidden; text-overflow: ellipsis; }
+.chip-row__chip:hover { background: var(--bdg-color-surface-2); }
+.chip-row__chip:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.chip-row__chip--selected { border-color: var(--bdg-color-primary); background: var(--bdg-color-primary-soft); color: var(--bdg-color-primary); }
+@media (min-width: 900px) {
+  .chip-row { flex-wrap: wrap; overflow: visible; }
+}
+
+/* "When" row inside the Log purchase dialog */
+.log-when { display: flex; flex-direction: column; gap: var(--bdg-space-2); }
+.log-when__summary { display: flex; align-items: center; justify-content: space-between; gap: var(--bdg-space-2); font-size: var(--bdg-text-sm); }
+.log-when__label { font-weight: var(--bdg-weight-medium); }
+.log-receipt { display: flex; align-items: center; gap: var(--bdg-space-3); }
+.log-receipt__thumb { width: 64px; height: 64px; object-fit: cover; border-radius: var(--bdg-radius-md); border: 1px solid var(--bdg-color-border); }
+.log-file { display: none; }
+
+/* Receipt photo in the transaction detail: a thumbnail that expands to full width */
+.receipt-thumb,
+.receipt-view {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+  border-radius: var(--bdg-radius-md);
+}
+.receipt-view { cursor: zoom-out; width: 100%; }
+.receipt-thumb:focus-visible,
+.receipt-view:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.receipt-thumb__img { display: block; width: 56px; height: 56px; object-fit: cover; border-radius: var(--bdg-radius-md); border: 1px solid var(--bdg-color-border); }
+.receipt-view__img { display: block; width: 100%; max-height: 70vh; object-fit: contain; border-radius: var(--bdg-radius-md); border: 1px solid var(--bdg-color-border); background: var(--bdg-color-surface-2); }
+
+/* Custom split editor inside the Log purchase dialog */
+.split-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--bdg-space-2);
+  padding: var(--bdg-space-3);
+  border-radius: var(--bdg-radius-md);
+  background: var(--bdg-color-surface-2);
+}
+.split-editor__quick { display: flex; flex-wrap: wrap; gap: var(--bdg-space-2); }
+.split-editor__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--bdg-space-2); }
+@media (max-width: 420px) {
+  .split-editor__fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Phone: one column, room for the fixed BottomNav */
+.app-main {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--bdg-screen-max);
+  margin: 0 auto;
+  padding: var(--bdg-space-2) var(--bdg-space-4) 96px;
+}
+.app-side { display: none; }
+
+/* Sidebar (desktop / Windows) */
+.app-side__brand { display: flex; align-items: center; gap: var(--bdg-space-3); padding: var(--bdg-space-2) var(--bdg-space-2) var(--bdg-space-4); }
+.app-side__brand-text { min-width: 0; }
+.app-side__household { font-weight: var(--bdg-weight-semibold); font-size: var(--bdg-text-sm); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app-side__nav { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; }
+.app-side__item {
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  align-items: center;
+  gap: var(--bdg-space-3);
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--bdg-space-3);
+  min-height: var(--bdg-control-md);
+  border: 0;
+  border-radius: var(--bdg-radius-md);
+  background: transparent;
+  color: var(--bdg-color-text-muted);
+  font-family: var(--bdg-font-sans);
+  font-size: var(--bdg-text-sm);
+  font-weight: var(--bdg-weight-medium);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease), color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.app-side__item:hover { background: var(--bdg-color-surface-2); color: var(--bdg-color-text); }
+.app-side__item:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.app-side__item--active { background: var(--bdg-color-primary-soft); color: var(--bdg-color-primary); font-weight: var(--bdg-weight-semibold); }
+.app-side__icon { display: inline-flex; width: 22px; height: 22px; flex: none; }
+.app-side__icon > svg { width: 100%; height: 100%; }
+.app-side__badge {
+  margin-left: auto;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: var(--bdg-radius-full);
+  background: var(--bdg-color-negative);
+  color: var(--bdg-color-on-negative); /* near-black on the dark theme's salmon (audit DS-5 / UI-5) */
+  font-size: 11px;
+  font-weight: var(--bdg-weight-bold);
+  line-height: 20px;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .app { display: grid; grid-template-columns: 248px minmax(0, 1fr); }
+  .app-side {
+    display: flex;
+    flex-direction: column;
+    gap: var(--bdg-space-2);
+    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: var(--bdg-space-6) var(--bdg-space-4);
+    background: var(--bdg-color-surface);
+    border-right: 1px solid var(--bdg-color-border);
+  }
+  .app-bottom-nav { display: none; }
+  .app-main { max-width: var(--bdg-container-max); padding: var(--bdg-space-6) var(--bdg-space-8) var(--bdg-space-12); }
+  .overview-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--bdg-space-4); align-items: start; }
+}
+
+/* Activity */
+.activity { width: 100%; max-width: 760px; margin: 0 auto; }
+.activity__filters { display: flex; flex-direction: column; gap: var(--bdg-space-3); }
+.activity__filter-label { align-self: center; margin-right: var(--bdg-space-1); }
+@media (min-width: 900px) {
+  .activity__filters { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+  .activity__filters > :nth-child(3) { grid-column: 1 / -1; }
+}
+
+/* Transaction detail dialog */
+.txn-detail { display: flex; flex-direction: column; border-top: 1px solid var(--bdg-color-border); }
+.txn-detail__row { display: flex; justify-content: space-between; align-items: center; gap: var(--bdg-space-4); padding: var(--bdg-space-3) 0; border-bottom: 1px solid var(--bdg-color-border); font-size: var(--bdg-text-sm); }
+.txn-detail__label { flex: none; color: var(--bdg-color-text-muted); }
+/* min-width: 0 + overflow-wrap so an unbroken merchant name or URL note wraps inside the sheet (audit UX-15) */
+.txn-detail__value { display: inline-flex; align-items: center; justify-content: flex-end; min-width: 0; overflow-wrap: anywhere; text-align: right; font-weight: var(--bdg-weight-medium); }
+
+/* Goals */
+.goals { width: 100%; max-width: 760px; margin: 0 auto; }
+.goals__grid { display: flex; flex-direction: column; gap: var(--bdg-space-3); }
+@media (min-width: 900px) {
+  .goals { max-width: none; }
+  .goals__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--bdg-space-4); align-items: start; }
+}
+.goal-icons { display: flex; flex-wrap: wrap; gap: var(--bdg-space-2); }
+.goal-icons__item {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--bdg-color-border-strong);
+  border-radius: var(--bdg-radius-md);
+  background: var(--bdg-color-surface);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--bdg-duration-fast) var(--bdg-ease), border-color var(--bdg-duration-fast) var(--bdg-ease), box-shadow var(--bdg-duration-fast) var(--bdg-ease);
+}
+.goal-icons__item:hover { background: var(--bdg-color-surface-2); }
+.goal-icons__item:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.goal-icons__item--active { border-color: var(--bdg-color-primary); background: var(--bdg-color-primary-soft); box-shadow: inset 0 0 0 1px var(--bdg-color-primary); }

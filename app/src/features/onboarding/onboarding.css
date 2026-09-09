@@ -1,0 +1,85 @@
+/* Onboarding - a centred single column with no app shell. Tokens only. */
+@import '../bills/bills.css';
+
+.onboarding {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--bdg-space-4) var(--bdg-space-4) var(--bdg-space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--bdg-space-4);
+}
+/* A wizard step is titled with a sentence ("When money comes in"), not a screen
+   name, so it should wrap rather than ellipsise - at 320px "When money comes in"
+   needed 291px of the 288px available and lost its last word. Screen titles
+   elsewhere keep the single-line treatment. */
+.onboarding .bdg-page-header__title {
+  white-space: normal;
+  overflow: visible;
+  text-wrap: balance;
+}
+.onboarding__p { margin: 0; }
+.onboarding__footer { display: flex; justify-content: space-between; align-items: center; gap: var(--bdg-space-2); flex-wrap: wrap; }
+.onboarding__member-head { display: flex; align-items: flex-end; gap: var(--bdg-space-3); }
+.onboarding__member-head > :last-child { flex: 1 1 auto; min-width: 0; }
+
+/* The first screen: two big choices */
+.onboarding__choices { display: grid; gap: var(--bdg-space-3); }
+.onboarding__choice {
+  -webkit-appearance: none;
+  appearance: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--bdg-space-1);
+  margin: 0;
+  padding: var(--bdg-space-4);
+  border: 1px solid var(--bdg-color-border-strong);
+  border-radius: var(--bdg-radius-lg);
+  background: var(--bdg-color-surface);
+  color: var(--bdg-color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--bdg-duration-fast) var(--bdg-ease), background-color var(--bdg-duration-fast) var(--bdg-ease);
+}
+.onboarding__choice:hover { border-color: var(--bdg-color-primary); background: var(--bdg-color-primary-soft); }
+.onboarding__choice:focus-visible { outline: none; box-shadow: var(--bdg-focus-ring); }
+.onboarding__choice-icon { font-size: 28px; line-height: 1; }
+.onboarding__choice-title { font-size: var(--bdg-text-lg); font-weight: var(--bdg-weight-semibold); }
+.onboarding__choice-text { margin: 0; }
+@media (min-width: 600px) {
+  .onboarding__choices { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Budgets: one row per category - checkbox + limit */
+.onboarding__categories { display: flex; flex-direction: column; }
+.onboarding__category {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 160px;
+  align-items: center;
+  gap: var(--bdg-space-3);
+  padding: var(--bdg-space-2) 0;
+  border-top: 1px solid var(--bdg-color-border);
+}
+.onboarding__category:first-child { border-top: 0; }
+.onboarding__category--off { opacity: 0.6; }
+@media (max-width: 420px) {
+  .onboarding__category { grid-template-columns: minmax(0, 1fr) 130px; }
+}
+
+/* Done: summary facts */
+.onboarding__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--bdg-space-2) var(--bdg-space-3);
+  margin: 0;
+  padding: var(--bdg-space-3) var(--bdg-space-4);
+  border-radius: var(--bdg-radius-md);
+  background: var(--bdg-color-surface-2);
+  font-size: var(--bdg-text-sm);
+}
+.onboarding__summary dt { color: var(--bdg-color-text-muted); }
+.onboarding__summary dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
