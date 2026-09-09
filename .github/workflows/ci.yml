@@ -108,7 +108,7 @@ jobs:
 
       - name: Keep the results and the server log
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: harness-results
           path: |
