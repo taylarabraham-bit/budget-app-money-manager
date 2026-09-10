@@ -32,7 +32,7 @@ export default defineConfig({
     unstubEnvs: true,
     coverage: {
       provider: 'v8',
-      include: ['src/lib/**', 'app/src/data/**', 'app/src/lib/**', 'app/src/sync/**', 'app/src/features/**/selectors.ts', 'app/src/features/**/dates.ts'],
+      include: ['src/lib/**', 'app/src/data/**', 'app/src/lib/**', 'app/src/sync/**', 'app/src/features/**/selectors.ts', 'app/src/features/**/dates.ts', 'app/src/pwa-precache.ts'],
     },
   },
 });

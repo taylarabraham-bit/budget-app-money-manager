@@ -115,3 +115,63 @@ jobs:
             harness-results.json
             dev-server.log
           if-no-files-found: warn
+
+  deploy-pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Only a green master is published; a pull request or a manual run never
+    # touches the live site.
+    needs: gates
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    # Pages needs write and an OIDC token to deploy; granted to this job alone so
+    # the workflow-level read-only default keeps holding for the others.
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # One deploy at a time, and never cancelled mid-way: a half-finished deploy
+    # leaves the site in a state no commit ever produced.
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      # The site lives under /<repo-name>/, so the build's base path must match
+      # or every asset URL 404s. There is no .env.local on the runner, so the
+      # published build carries no server address: sync stays off until a
+      # server is entered in Settings.
+      - name: Build the app for Pages
+        run: npm run app:build
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+
+      # Nothing unit-tests public/sw.js, so before the build goes live prove it
+      # installs and opens offline the way an installed phone will see it
+      # (scripts/pwa-check.mjs serves app/dist under the same base path).
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Prove the build installs and opens offline
+        run: npm run pwa-check -- --base /${{ github.event.repository.name }}/
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: app/dist
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

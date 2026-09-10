@@ -4,7 +4,7 @@ import '@budget-app/ui/styles.css';
 import './app.css';
 import App from './App';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { requestPersistentStorage, restoreDurableMirror } from './data/durable';
+import { isNativeShell, requestPersistentStorage, restoreDurableMirror } from './data/durable';
 import { STORAGE_KEYS } from './data/persist';
 import { SettingsProvider } from './data/settings';
 import { HouseholdProvider } from './data/store';
@@ -36,6 +36,7 @@ async function boot() {
     }
   }
   void requestPersistentStorage();
+  void registerOfflineShell();
 
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
@@ -66,6 +67,25 @@ async function boot() {
       </ErrorBoundary>
     </StrictMode>,
   );
+}
+
+// Installed-PWA offline shell: public/sw.js precaches the built app. Only a
+// production build has anything to cache (in dev the worker's placeholders are
+// unfilled and it caches nothing), and the Capacitor shell ships its own files,
+// so neither registers here. Reminders register the same worker lazily; a
+// second register() of one URL is a no-op. Failure just means no offline shell.
+async function registerOfflineShell() {
+  if (!import.meta.env.PROD || isNativeShell() || !('serviceWorker' in navigator)) return;
+  try {
+    const registration = await navigator.serviceWorker.register(import.meta.env.BASE_URL + 'sw.js');
+    // The browser only re-checks the worker on a full navigation; an installed
+    // app is mostly resumed, so check on every return to the foreground too.
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') registration.update().catch(() => undefined);
+    });
+  } catch {
+    // no service worker support, blocked storage, or an install failure
+  }
 }
 
 void boot();

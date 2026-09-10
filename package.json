@@ -35,6 +35,8 @@
     "coverage": "vitest run --coverage",
     "lint": "eslint .",
     "ci": "npm run lint && npm run typecheck && npm run test && npm run build && npm run app:build",
+    "pwa-icons": "node scripts/pwa-icons.mjs",
+    "pwa-check": "node scripts/pwa-check.mjs",
     "ui-audit": "node scripts/ui-audit.mjs",
     "app:build:uitest": "npm run build --workspace app -- --mode uitest",
     "app:build:android": "npm run build --workspace app -- --outDir dist-android",

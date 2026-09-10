@@ -104,7 +104,8 @@ export async function requestNotificationPermission(): Promise<PermissionState> 
 async function registration(): Promise<ServiceWorkerRegistration | null> {
   if (!('serviceWorker' in navigator)) return null;
   try {
-    return (await navigator.serviceWorker.getRegistration()) ?? (await navigator.serviceWorker.register('/sw.js'));
+    // The same worker main.tsx registers for the offline shell; served under the app's base path (a sub-path on GitHub Pages).
+    return (await navigator.serviceWorker.getRegistration()) ?? (await navigator.serviceWorker.register(import.meta.env.BASE_URL + 'sw.js'));
   } catch {
     return null;
   }
